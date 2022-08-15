@@ -241,6 +241,8 @@ public Action OnBanClient(int iClient, int iTime, int iFlags, const char[] sReas
 	{
 		g_iPlayerInfo[iClient].iSessionStats[ST_PLAYTIME] = -1;
 	}
+
+	return Plugin_Continue;
 }
 
 public Action OnBanIdentity(const char[] sIdEntity, int iTime, int iFlags, const char[] sReason, const char[] sCommand, any Source)
@@ -252,6 +254,8 @@ public Action OnBanIdentity(const char[] sIdEntity, int iTime, int iFlags, const
 		FormatEx(sQuery, sizeof(sQuery), SQL_UPDATE_CLEAN_BAN_CLIENT, g_sTableName, sIdEntity);
 		g_hDatabase.Query(SQL_Callback, sQuery);
 	}
+
+	return Plugin_Continue;
 }
 
 public void OnClientDisconnect(int iClient)

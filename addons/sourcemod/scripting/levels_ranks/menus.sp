@@ -78,6 +78,8 @@ int MainMenu_Callback(Menu hMenu, MenuAction mAction, int iClient, int iSlot)
 			hMenu.Close();
 		} 
 	}
+
+	return 0;
 }
 
 void MenuAdmin(int iClient)
@@ -142,9 +144,11 @@ int MenuAdmin_Callback(Menu hMenu, MenuAction mAction, int iClient, int iSlot)
 			hMenu.Close();
 		}
 	}
+
+	return 0;
 }
 
-void GiveTakeValue(int iClient, const char sID[] = NULL_STRING)
+void GiveTakeValue(int iClient, const char[] sID = NULL_STRING)
 {
 	Menu hMenu = new Menu(sID[0] == '\0' ? GiveTakeValue_Callback : ChangeExpPlayers_Callback, MenuAction_Select);
 
@@ -220,6 +224,8 @@ int ChangeExpPlayers_Callback(Menu hMenu, MenuAction mAction, int iClient, int i
 			hMenu.Close();
 		}
 	}
+
+	return 0;
 }
 
 int GiveTakeValue_Callback(Menu hMenu, MenuAction mAction, int iClient, int iSlot)
@@ -247,6 +253,8 @@ int GiveTakeValue_Callback(Menu hMenu, MenuAction mAction, int iClient, int iSlo
 			hMenu.Close();
 		}
 	}
+
+	return 0;
 }
 
 void MyStats(int iClient)
@@ -338,6 +346,8 @@ int MyStats_Callback(Menu hMenu, MenuAction mAction, int iClient, int iSlot)
 			hMenu.Close();
 		}
 	}
+
+	return 0;
 }
 
 void MyStatsSecondary(int iClient)
@@ -371,6 +381,8 @@ int MyStatsSecondary_Callback(Menu hMenu, MenuAction mAction, int iClient, int i
 			hMenu.Close();
 		}
 	}
+
+	return 0;
 }
 
 void MyStatsSession(int iClient)
@@ -409,6 +421,8 @@ int MyStatsSession_Callback(Menu hMenu, MenuAction mAction, int iClient, int iSl
 	{
 		hMenu.Close();
 	}
+
+	return 0;
 }
 
 void MyStatsReset(int iClient)
@@ -454,6 +468,8 @@ int MyStatsReset_Callback(Menu hMenu, MenuAction mAction, int iClient, int iSlot
 	{
 		hMenu.Close();
 	}
+
+	return 0;
 }
 
 void MyPrivilegesSettings(int iClient)
@@ -487,6 +503,8 @@ int MyPrivilegesSettings_Callback(Menu hMenu, MenuAction mAction, int iClient, i
 			hMenu.Close();
 		}
 	}
+
+	return 0;
 }
 
 void MenuTop(int iClient)
@@ -543,6 +561,8 @@ int MenuTop_Callback(Menu hMenu, MenuAction mAction, int iClient, int iSlot)
 			hMenu.Close();
 		}
 	}
+
+	return 0;
 }
 
 void OverAllTopPlayers(int iClient, bool bPlaytime = true)
@@ -572,6 +592,8 @@ int OverAllTopPlayers_Callback(Menu hMenu, MenuAction mAction, int iClient, int 
 	{
 		hMenu.Close();
 	}
+
+	return 0;
 }
 
 void OverAllRanks(int iClient)
@@ -617,4 +639,6 @@ int OverAllRanks_Callback(Menu hMenu, MenuAction mAction, int iClient, int iSlot
 	{
 		hMenu.Close();
 	}
+
+	return 0;
 }

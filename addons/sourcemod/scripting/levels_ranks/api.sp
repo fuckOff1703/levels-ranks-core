@@ -122,11 +122,15 @@ int Native_GetCountPlayers(Handle hPlugin, int iArgs)
 int Native_GetTableName(Handle hPlugin, int iArgs)
 {
 	SetNativeString(1, g_sTableName, GetNativeCell(2), false);
+
+	return 0;
 }
 
 int Native_GetTitleMenu(Handle hPlugin, int iArgs)
 {
 	SetNativeString(1, g_sPluginTitle, GetNativeCell(2), false);
+
+	return 0;
 }
 
 int Native_GetClientStatus(Handle hPlugin, int iArgs)
@@ -164,11 +168,15 @@ int Native_ResetPlayerStats(Handle hPlugin, int iArgs)
 	{
 		ResetPlayerStats(iClient);
 	}
+
+	return 0;
 }
 
 int Native_RefreshConfigs(Handle hPlugin, int iArgs)
 {
 	SetSettings();
+
+	return 0;
 }
 
 int Native_ChangeClientValue(Handle hPlugin, int iArgs)
@@ -206,6 +214,8 @@ int Native_ChangeClientValue(Handle hPlugin, int iArgs)
 int Native_RoundWithoutValue(Handle hPlugin, int iArgs)
 {
 	g_bAllowStatistic = false;
+
+	return 0;
 }
 
 int Native_ShowMenu(Handle hPlugin, int iArgs)
@@ -219,11 +229,15 @@ int Native_ShowMenu(Handle hPlugin, int iArgs)
 		case LR_SettingMenu: MyPrivilegesSettings(iClient);
 		case LR_TopMenu: MenuTop(iClient);
 	}
+
+	return 0;
 }
 
 int Native_PrintToChat(Handle hPlugin, int iArgs)
 {
 	LR_PrintMessage(GetNativeCell(1), GetNativeCell(2), true, NULL_STRING);
+
+	return 0;
 }
 
 // Forwards
