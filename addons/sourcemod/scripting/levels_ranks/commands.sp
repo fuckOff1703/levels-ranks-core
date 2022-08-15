@@ -6,7 +6,7 @@ Action Call_MainMenu(int iClient, int iArgs)
 		CheckRank(iClient);
 		MainMenu(iClient);
 	}
-	else 
+	else
 	{
 		LR_PrintMessage(iClient, true, false, "You account is not loaded. Please reconnect on the server!");
 	}
@@ -153,42 +153,82 @@ public void OnClientSayCommand_Post(int iClient, const char[] sCommand, const ch
 {
 	if(CheckStatus(iClient))
 	{
-		if(!strcmp(sArgs, "top", false) || !strcmp(sArgs, "!top", false))
+		if(!strcmp(sArgs, "top", false))
 		{
 			OverAllTopPlayers(iClient, false);
 		}
-		else if(!strcmp(sArgs, "toptime", false) || !strcmp(sArgs, "!toptime", false))
+		else if(!strcmp(sArgs, "toptime", false))
 		{
 			OverAllTopPlayers(iClient);
 		}
-		else if(!strcmp(sArgs, "session", false) || !strcmp(sArgs, "!session", false))
+		else if(!strcmp(sArgs, "session", false))
 		{
 			MyStatsSession(iClient);
 		}
-		else if(!strcmp(sArgs, "rank", false) || !strcmp(sArgs, "!rank", false))
+		else if(!strcmp(sArgs, "rank", false))
 		{
-			int iKills = g_iPlayerInfo[iClient].iStats[ST_KILLS],
-				iDeaths = g_iPlayerInfo[iClient].iStats[ST_DEATHS];
-
-			float fKDR = iKills / (iDeaths ? float(iDeaths) : 1.0);
-
-			if(g_Settings[LR_ShowRankMessage])
-			{
-				int iPlaceInTop = g_iPlayerInfo[iClient].iStats[ST_PLACEINTOP],
-					iExp = g_iPlayerInfo[iClient].iStats[ST_EXP];
-
-				for(int i = GetMaxPlayers(); --i;)
-				{
-					if(CheckStatus(i)) 
-					{
-						LR_PrintMessage(i, true, false, "%T", "RankPlayer", i, iClient, iPlaceInTop, g_iDBCountPlayers, iExp, iKills, iDeaths, fKDR);
-					}
-				}
-			}
-			else
-			{
-				LR_PrintMessage(iClient, true, false, "%T", "RankPlayer", iClient, iClient, g_iPlayerInfo[iClient].iStats[ST_PLACEINTOP], g_iDBCountPlayers, g_iPlayerInfo[iClient].iStats[ST_EXP], iKills, iDeaths, fKDR);
-			}
+			Call_Rank(iClient, 0);
 		}
 	}
+}
+
+Action Call_TopMenu(int iClient, int iArgs)
+{
+	if(CheckStatus(iClient))
+	{
+		OverAllTopPlayers(iClient, false);
+	}
+
+	return Plugin_Handled;
+}
+
+Action Call_TopTimeMenu(int iClient, int iArgs)
+{
+	if(CheckStatus(iClient))
+	{
+		OverAllTopPlayers(iClient);
+	}
+
+	return Plugin_Handled;
+}
+
+Action Call_Rank(int iClient, int iArgs)
+{
+	if(CheckStatus(iClient))
+	{
+		int iKills = g_iPlayerInfo[iClient].iStats[ST_KILLS],
+			iDeaths = g_iPlayerInfo[iClient].iStats[ST_DEATHS];
+
+		float fKDR = iKills / (iDeaths ? float(iDeaths) : 1.0);
+
+		if(g_Settings[LR_ShowRankMessage])
+		{
+			int iPlaceInTop = g_iPlayerInfo[iClient].iStats[ST_PLACEINTOP],
+				iExp = g_iPlayerInfo[iClient].iStats[ST_EXP];
+
+			for(int i = GetMaxPlayers(); --i;)
+			{
+				if(CheckStatus(i))
+				{
+					LR_PrintMessage(i, true, false, "%T", "RankPlayer", i, iClient, iPlaceInTop, g_iDBCountPlayers, iExp, iKills, iDeaths, fKDR);
+				}
+			}
+		}
+		else
+		{
+			LR_PrintMessage(iClient, true, false, "%T", "RankPlayer", iClient, iClient, g_iPlayerInfo[iClient].iStats[ST_PLACEINTOP], g_iDBCountPlayers, g_iPlayerInfo[iClient].iStats[ST_EXP], iKills, iDeaths, fKDR);
+		}
+	}
+
+	return Plugin_Handled;
+}
+
+Action Call_SessionMenu(int iClient, int iArgs)
+{
+	if(CheckStatus(iClient))
+	{
+		MyStatsSession(iClient);
+	}
+
+	return Plugin_Handled;
 }

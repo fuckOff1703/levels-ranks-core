@@ -126,6 +126,11 @@ public void OnPluginStart()
 	RegServerCmd("sm_lvl_reset", Call_ResetData, "Сlearing all data in the database");
 	RegAdminCmd("sm_lvl_del", Call_ResetPlayer, ADMFLAG_ROOT, "Resets player stats");
 
+	RegConsoleCmd("sm_top", Call_TopMenu, "Opens top players menu");
+	RegConsoleCmd("sm_toptime", Call_TopTimeMenu, "Opens top players time menu");
+	RegConsoleCmd("sm_rank", Call_Rank, "Show rank msg");
+	RegConsoleCmd("sm_session", Call_SessionMenu, "Opens session menu");
+
 	HookEvents();
 	SetSettings();
 	ConnectDB();
