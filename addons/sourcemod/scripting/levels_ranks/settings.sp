@@ -14,6 +14,7 @@ void SetSettings()
 	{
 		g_hRankNames = new ArrayList(sizeof(sBuffer) / 4 + 1);
 		g_hRankExp = new ArrayList();
+		g_hPoints = new ArrayList(16);
 
 		BuildPath(Path_SM, sPath, sizeof(sPath), "configs/levels_ranks/settings.ini");
 	}
@@ -21,6 +22,7 @@ void SetSettings()
 	{
 		g_hRankNames.Clear();
 		g_hRankExp.Clear();
+		g_hPoints.Clear();
 	}
 
 	if(!hKv.ImportFromFile(sPath))
@@ -83,6 +85,25 @@ void SetSettings()
 	g_Settings[LR_CleanDB_BanClient] = hKv.GetNum("lr_cleandb_banclient", 1);
 	g_Settings[LR_DB_SaveDataPlayer_Mode] = hKv.GetNum("lr_db_savedataplayer_mode", 1);
 	g_Settings[LR_DB_Charset_Type] = hKv.GetNum("lr_db_character_type", 0);
+
+	hKv.Rewind();
+
+	if(hKv.JumpToKey("AdminMenuPoints") && hKv.GotoFirstSubKey(false))
+	{
+		char sPoints[16];
+		do
+		{
+			if(hKv.GetSectionName(sPoints, sizeof(sPoints)))
+			{
+				g_hPoints.PushString(sPoints);
+			}
+			if(hKv.GetString("", sPoints, sizeof(sPoints)))
+			{
+				g_hPoints.PushString(sPoints);
+			}
+		}
+		while(hKv.GotoNextKey(false));
+	}
 
 	hKv.Close();
 

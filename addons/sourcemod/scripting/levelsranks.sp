@@ -92,7 +92,8 @@ PrivateForward  g_hForward_Hook[LR_HookType],
 EngineVersion   g_iEngine;		// Init in api.sp
 
 ArrayList       g_hRankNames, 
-                g_hRankExp;
+                g_hRankExp,
+				g_hPoints;
 
 Cookie          g_hLastResetMyStats;
 

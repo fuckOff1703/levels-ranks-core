@@ -167,19 +167,11 @@ void GiveTakeValue(int iClient, const char sID[] = NULL_STRING)
 	}
 	else
 	{
-		static const char sNumList[][] = 
+		char sPoints[16];
+		for(int j = 0; j < g_hPoints.Length; j++)
 		{
-			"10",
-			"100",
-			"1000",
-			"-1000",
-			"-100",
-			"-10"
-		};
-
-		for(int j = 0; j != sizeof(sNumList);)
-		{
-			hMenu.AddItem(sID, sNumList[j++]);
+			g_hPoints.GetString(j, sPoints, sizeof(sPoints));
+			hMenu.AddItem(sID, sPoints);
 		}
 	}
 
