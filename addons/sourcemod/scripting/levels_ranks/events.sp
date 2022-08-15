@@ -249,7 +249,7 @@ void Events_Rounds(Event hEvent, const char[] sName, bool bDontBroadcast)
 						GiveExpForStreakKills(i);
 					}
 
-					if(g_Settings[LR_ShowUsualMessage] == 2)
+					if(g_Settings[LR_ShowUsualMessage] == 2 && iTeam > 1)
 					{
 						if(g_iPlayerInfo[i].iRoundExp)
 						{
