@@ -64,6 +64,8 @@ void LR_PrintMessage(int iClient, bool bPrefix, bool bNative, const char[] sForm
 
 				case Engine_CSS:
 				{
+					ReplaceString(sMessage, sizeof(sMessage), "#", "\x07");
+
 					static const int iColorsCSSOB[] = {0xFFFFFF, 0x000000, 0x00AD00, 0xFF0000, 0x00FF00, 0x99FF99, 0xFF4040, 0xCCCCCC, 0xFFBD6B, 0xC1D1E1, 0x99CCFF, 0x3D46FF, 0xD62BD6, 0xFA00FA, 0xFF8080, 0xFA8B00};
 
 					decl char sColor[16];
@@ -105,7 +107,7 @@ void LR_PrintMessage(int iClient, bool bPrefix, bool bNative, const char[] sForm
 			{
 				if(GetUserMessageType() == UM_Protobuf)
 				{
-					Protobuf hProtobuf = view_as<Protobuf>(hMessage);
+					Protobuf hProtobuf = UserMessageToProtobuf(hMessage);
 
 					hProtobuf.SetInt("ent_idx", 0);
 					hProtobuf.SetString("text", sMessage);
@@ -113,7 +115,7 @@ void LR_PrintMessage(int iClient, bool bPrefix, bool bNative, const char[] sForm
 				}
 				else
 				{
-					BfWrite hMessageStack = view_as<BfWrite>(hMessage);
+					BfWrite hMessageStack = UserMessageToBfWrite(hMessage);
 
 					hMessageStack.WriteByte(0);
 					hMessageStack.WriteString(sMessage);
